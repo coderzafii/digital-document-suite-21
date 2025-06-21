@@ -2,10 +2,12 @@
 import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { ArrowLeft, Download, RefreshCw, CheckCircle, AlertCircle } from 'lucide-react';
-import { Progress } from '@/components/ui/progress';
+import { ArrowLeft, AlertCircle } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
-import FileUpload from './FileUpload';
+import { getAcceptedFormats, performConversion } from '@/utils/fileConversion';
+import ConversionSteps from './conversion/ConversionSteps';
+import ConversionProgress from './conversion/ConversionProgress';
+import ConversionDownload from './conversion/ConversionDownload';
 
 interface Tool {
   id: string;
@@ -32,177 +34,6 @@ const ConversionTool = ({ tool, onBack }: ConversionToolProps) => {
   const [conversionError, setConversionError] = useState<string | null>(null);
   const { toast } = useToast();
 
-  const getAcceptedFormats = () => {
-    switch (tool.fromFormat.toLowerCase()) {
-      case 'pdf':
-        return ['pdf'];
-      case 'docx':
-        return ['docx', 'doc'];
-      case 'jpg':
-        return ['jpg', 'jpeg'];
-      case 'png':
-        return ['png'];
-      default:
-        return ['pdf', 'docx', 'doc', 'jpg', 'jpeg', 'png'];
-    }
-  };
-
-  const convertImageToPdf = async (file: File): Promise<Blob> => {
-    return new Promise((resolve) => {
-      const canvas = document.createElement('canvas');
-      const ctx = canvas.getContext('2d');
-      const img = new Image();
-      
-      img.onload = () => {
-        // Set canvas size to image size
-        canvas.width = img.width;
-        canvas.height = img.height;
-        
-        // Draw image on canvas
-        ctx?.drawImage(img, 0, 0);
-        
-        // Create a simple PDF-like structure
-        const pdfContent = createSimplePdf(canvas.toDataURL());
-        const blob = new Blob([pdfContent], { type: 'application/pdf' });
-        resolve(blob);
-      };
-      
-      img.src = URL.createObjectURL(file);
-    });
-  };
-
-  const createSimplePdf = (imageDataUrl: string): string => {
-    // This is a very basic PDF structure - in production, use a proper PDF library like jsPDF
-    const pdfHeader = `%PDF-1.4
-1 0 obj
-<<
-/Type /Catalog
-/Pages 2 0 R
->>
-endobj
-
-2 0 obj
-<<
-/Type /Pages
-/Kids [3 0 R]
-/Count 1
->>
-endobj
-
-3 0 obj
-<<
-/Type /Page
-/Parent 2 0 R
-/MediaBox [0 0 612 792]
-/Contents 4 0 R
->>
-endobj
-
-4 0 obj
-<<
-/Length 44
->>
-stream
-BT
-/F1 12 Tf
-100 700 Td
-(Converted Image) Tj
-ET
-endstream
-endobj
-
-xref
-0 5
-0000000000 65535 f 
-0000000010 00000 n 
-0000000079 00000 n 
-0000000173 00000 n 
-0000000301 00000 n 
-trailer
-<<
-/Size 5
-/Root 1 0 R
->>
-startxref
-398
-%%EOF`;
-    return pdfHeader;
-  };
-
-  const convertTextToDocx = async (content: string): Promise<Blob> => {
-    // Create a basic DOCX-like structure (simplified)
-    const docxContent = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
-  <w:body>
-    <w:p>
-      <w:r>
-        <w:t>${content}</w:t>
-      </w:r>
-    </w:p>
-  </w:body>
-</w:document>`;
-    
-    return new Blob([docxContent], { 
-      type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' 
-    });
-  };
-
-  const extractTextFromPdf = async (file: File): Promise<string> => {
-    // This is a placeholder - in a real app, you'd use PDF.js or similar
-    return "This is extracted text from the PDF file. In a real implementation, this would contain the actual PDF content extracted using a proper PDF parsing library like PDF.js.";
-  };
-
-  const performConversion = async (file: File): Promise<{ blob: Blob; fileName: string }> => {
-    const baseName = file.name.replace(/\.[^/.]+$/, '');
-    
-    switch (tool.id) {
-      case 'jpg-to-pdf':
-      case 'png-to-pdf':
-        const pdfBlob = await convertImageToPdf(file);
-        return { blob: pdfBlob, fileName: `${baseName}.pdf` };
-        
-      case 'pdf-to-word':
-        const extractedText = await extractTextFromPdf(file);
-        const docxBlob = await convertTextToDocx(extractedText);
-        return { blob: docxBlob, fileName: `${baseName}.docx` };
-        
-      case 'word-to-pdf':
-        // Read text content and convert to PDF
-        const textContent = await file.text();
-        const pdfFromText = createSimplePdf('');
-        const pdfBlobFromText = new Blob([pdfFromText], { type: 'application/pdf' });
-        return { blob: pdfBlobFromText, fileName: `${baseName}.pdf` };
-        
-      case 'pdf-to-jpg':
-      case 'pdf-to-png':
-        // Create a simple image representation
-        const canvas = document.createElement('canvas');
-        canvas.width = 800;
-        canvas.height = 600;
-        const ctx = canvas.getContext('2d');
-        if (ctx) {
-          ctx.fillStyle = '#ffffff';
-          ctx.fillRect(0, 0, 800, 600);
-          ctx.fillStyle = '#000000';
-          ctx.font = '20px Arial';
-          ctx.fillText('Converted from PDF', 50, 50);
-        }
-        
-        return new Promise((resolve) => {
-          canvas.toBlob((blob) => {
-            const format = tool.toFormat.toLowerCase();
-            resolve({ 
-              blob: blob!, 
-              fileName: `${baseName}.${format}` 
-            });
-          }, `image/${tool.toFormat.toLowerCase()}`);
-        });
-        
-      default:
-        throw new Error('Unsupported conversion type');
-    }
-  };
-
   const simulateConversion = async () => {
     if (!selectedFile) return;
 
@@ -218,7 +49,7 @@ startxref
       }
 
       // Perform actual conversion
-      const { blob, fileName } = await performConversion(selectedFile);
+      const { blob, fileName } = await performConversion(selectedFile, tool.id, tool.toFormat);
       
       // Create download URL
       const url = URL.createObjectURL(blob);
@@ -312,85 +143,27 @@ startxref
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-6">
-              {/* Step 1: File Upload */}
-              <div>
-                <h3 className="text-lg font-semibold mb-4 flex items-center">
-                  <span className="w-6 h-6 bg-blue-500 text-white rounded-full flex items-center justify-center text-sm mr-3">1</span>
-                  Select your {tool.fromFormat} file
-                </h3>
-                <FileUpload
-                  acceptedFormats={getAcceptedFormats()}
-                  onFileSelect={setSelectedFile}
-                  maxSize={50}
-                />
-              </div>
+              <ConversionSteps
+                selectedFile={selectedFile}
+                onFileSelect={setSelectedFile}
+                acceptedFormats={getAcceptedFormats(tool.fromFormat)}
+                fromFormat={tool.fromFormat}
+                toFormat={tool.toFormat}
+                onConvert={simulateConversion}
+                isConverting={isConverting}
+              />
 
-              {/* Step 2: Convert */}
-              {selectedFile && !conversionComplete && (
-                <div>
-                  <h3 className="text-lg font-semibold mb-4 flex items-center">
-                    <span className="w-6 h-6 bg-blue-500 text-white rounded-full flex items-center justify-center text-sm mr-3">2</span>
-                    Convert your file
-                  </h3>
-                  
-                  {!isConverting ? (
-                    <Button
-                      onClick={simulateConversion}
-                      className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white py-3"
-                      size="lg"
-                    >
-                      <RefreshCw className="w-5 h-5 mr-2" />
-                      Convert to {tool.toFormat}
-                    </Button>
-                  ) : (
-                    <div className="space-y-4">
-                      <div className="flex items-center justify-center space-x-2 text-blue-600">
-                        <RefreshCw className="w-5 h-5 animate-spin" />
-                        <span>Converting your file...</span>
-                      </div>
-                      <Progress value={conversionProgress} className="w-full" />
-                      <p className="text-center text-sm text-gray-500">
-                        {conversionProgress}% complete
-                      </p>
-                    </div>
-                  )}
-                </div>
-              )}
+              <ConversionProgress
+                isConverting={isConverting}
+                progress={conversionProgress}
+              />
 
-              {/* Step 3: Download */}
-              {conversionComplete && (
-                <div>
-                  <h3 className="text-lg font-semibold mb-4 flex items-center">
-                    <span className="w-6 h-6 bg-green-500 text-white rounded-full flex items-center justify-center text-sm mr-3">
-                      <CheckCircle className="w-4 h-4" />
-                    </span>
-                    Download your converted file
-                  </h3>
-                  <div className="space-y-4">
-                    <div className="flex items-center justify-center p-4 bg-green-50 rounded-lg border border-green-200">
-                      <CheckCircle className="w-6 h-6 text-green-600 mr-3" />
-                      <span className="text-green-800 font-medium">
-                        Conversion completed successfully!
-                      </span>
-                    </div>
-                    <Button
-                      onClick={handleDownload}
-                      className="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white py-3"
-                      size="lg"
-                    >
-                      <Download className="w-5 h-5 mr-2" />
-                      Download {tool.toFormat} file
-                    </Button>
-                    <Button
-                      onClick={resetConversion}
-                      variant="outline"
-                      className="w-full"
-                    >
-                      Convert another file
-                    </Button>
-                  </div>
-                </div>
-              )}
+              <ConversionDownload
+                isComplete={conversionComplete}
+                toFormat={tool.toFormat}
+                onDownload={handleDownload}
+                onReset={resetConversion}
+              />
 
               {/* Error State */}
               {conversionError && (
