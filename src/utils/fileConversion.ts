@@ -193,16 +193,16 @@ export const performConversion = async (file: File, toolId: string, toFormat: st
       
     case 'word-to-pdf':
       const textContent = await file.text();
-      const canvas = document.createElement('canvas');
-      const ctx = canvas.getContext('2d');
-      canvas.width = 612;
-      canvas.height = 792;
+      const wordCanvas = document.createElement('canvas');
+      const wordCtx = wordCanvas.getContext('2d');
+      wordCanvas.width = 612;
+      wordCanvas.height = 792;
       
-      if (ctx) {
-        ctx.fillStyle = '#ffffff';
-        ctx.fillRect(0, 0, 612, 792);
-        ctx.fillStyle = '#000000';
-        ctx.font = '12px Arial';
+      if (wordCtx) {
+        wordCtx.fillStyle = '#ffffff';
+        wordCtx.fillRect(0, 0, 612, 792);
+        wordCtx.fillStyle = '#000000';
+        wordCtx.font = '12px Arial';
         
         // Simple text wrapping
         const lines = textContent.split('\n');
@@ -213,10 +213,10 @@ export const performConversion = async (file: File, toolId: string, toFormat: st
           
           words.forEach(word => {
             const testLine = currentLine + word + ' ';
-            const metrics = ctx.measureText(testLine);
+            const metrics = wordCtx.measureText(testLine);
             
             if (metrics.width > 550 && currentLine !== '') {
-              ctx.fillText(currentLine, 50, y);
+              wordCtx.fillText(currentLine, 50, y);
               currentLine = word + ' ';
               y += 20;
             } else {
@@ -225,14 +225,14 @@ export const performConversion = async (file: File, toolId: string, toFormat: st
           });
           
           if (currentLine) {
-            ctx.fillText(currentLine, 50, y);
+            wordCtx.fillText(currentLine, 50, y);
             y += 20;
           }
         });
       }
       
       return new Promise((resolve) => {
-        canvas.toBlob((blob) => {
+        wordCanvas.toBlob((blob) => {
           if (blob) {
             // Convert canvas to proper PDF
             convertImageToPdf(new File([blob], 'temp.png', { type: 'image/png' }))
@@ -246,25 +246,25 @@ export const performConversion = async (file: File, toolId: string, toFormat: st
     case 'pdf-to-jpg':
     case 'pdf-to-png':
       // Create a canvas representation of the PDF
-      const canvas = document.createElement('canvas');
-      canvas.width = 800;
-      canvas.height = 600;
-      const ctx = canvas.getContext('2d');
+      const pdfCanvas = document.createElement('canvas');
+      pdfCanvas.width = 800;
+      pdfCanvas.height = 600;
+      const pdfCtx = pdfCanvas.getContext('2d');
       
-      if (ctx) {
-        ctx.fillStyle = '#ffffff';
-        ctx.fillRect(0, 0, 800, 600);
-        ctx.fillStyle = '#333333';
-        ctx.font = 'bold 24px Arial';
-        ctx.textAlign = 'center';
-        ctx.fillText('PDF Content Preview', 400, 100);
-        ctx.font = '16px Arial';
-        ctx.fillText('This represents the first page of your PDF', 400, 150);
-        ctx.fillText('In a full implementation, this would show actual PDF content', 400, 180);
+      if (pdfCtx) {
+        pdfCtx.fillStyle = '#ffffff';
+        pdfCtx.fillRect(0, 0, 800, 600);
+        pdfCtx.fillStyle = '#333333';
+        pdfCtx.font = 'bold 24px Arial';
+        pdfCtx.textAlign = 'center';
+        pdfCtx.fillText('PDF Content Preview', 400, 100);
+        pdfCtx.font = '16px Arial';
+        pdfCtx.fillText('This represents the first page of your PDF', 400, 150);
+        pdfCtx.fillText('In a full implementation, this would show actual PDF content', 400, 180);
         
         // Add some sample content
-        ctx.textAlign = 'left';
-        ctx.font = '14px Arial';
+        pdfCtx.textAlign = 'left';
+        pdfCtx.font = '14px Arial';
         const sampleText = [
           'Document Title',
           '',
@@ -277,12 +277,12 @@ export const performConversion = async (file: File, toolId: string, toFormat: st
         ];
         
         sampleText.forEach((line, index) => {
-          ctx.fillText(line, 50, 250 + (index * 25));
+          pdfCtx.fillText(line, 50, 250 + (index * 25));
         });
       }
       
       return new Promise((resolve) => {
-        canvas.toBlob((blob) => {
+        pdfCanvas.toBlob((blob) => {
           const format = toFormat.toLowerCase();
           resolve({ 
             blob: blob!, 
