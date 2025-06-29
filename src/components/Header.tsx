@@ -2,16 +2,19 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger } from "@/components/ui/navigation-menu";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { ChevronDown, Menu, X } from "lucide-react";
+import { ChevronDown, Menu, X, Sparkles } from "lucide-react";
+
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  return <header className="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60">
+  
+  return (
+    <header className="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur-xl supports-[backdrop-filter]:bg-white/80 shadow-lg">
       <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <div className="flex items-center pl-4">
-            <a href="/" className="hover:opacity-80 transition-opacity">
-              <img src="/lovable-uploads/46545966-2c8a-4e1c-a38f-a4299bcf0186.png" alt="Free Tools Forever" className="h-12 w-auto" />
+            <a href="/" className="hover:opacity-80 transition-all duration-300 hover:scale-105">
+              <img src="/lovable-uploads/46545966-2c8a-4e1c-a38f-a4299bcf0186.png" alt="Free Tools Forever" className="h-12 w-auto drop-shadow-md" />
             </a>
           </div>
 
@@ -19,50 +22,50 @@ const Header = () => {
           <NavigationMenu className="hidden md:flex">
             <NavigationMenuList className="flex items-center space-x-1">
               <NavigationMenuItem>
-                <NavigationMenuLink className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50">
+                <NavigationMenuLink className="group inline-flex h-10 w-max items-center justify-center rounded-lg bg-background px-6 py-2 text-sm font-semibold transition-all duration-300 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 hover:text-blue-700 focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 hover:shadow-md">
                   MERGE PDF
                 </NavigationMenuLink>
               </NavigationMenuItem>
 
               <NavigationMenuItem>
-                <NavigationMenuLink className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50">
+                <NavigationMenuLink className="group inline-flex h-10 w-max items-center justify-center rounded-lg bg-background px-6 py-2 text-sm font-semibold transition-all duration-300 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 hover:text-blue-700 focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 hover:shadow-md">
                   SPLIT PDF
                 </NavigationMenuLink>
               </NavigationMenuItem>
 
               <NavigationMenuItem>
-                <NavigationMenuLink className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50">
+                <NavigationMenuLink className="group inline-flex h-10 w-max items-center justify-center rounded-lg bg-background px-6 py-2 text-sm font-semibold transition-all duration-300 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 hover:text-blue-700 focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 hover:shadow-md">
                   COMPRESS PDF
                 </NavigationMenuLink>
               </NavigationMenuItem>
 
               <NavigationMenuItem>
-                <NavigationMenuTrigger className="h-10 px-4 py-2">
+                <NavigationMenuTrigger className="h-10 px-6 py-2 font-semibold rounded-lg hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 hover:text-blue-700 transition-all duration-300">
                   CONVERT PDF
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <div className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
-                    <NavigationMenuLink className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
-                      <div className="text-sm font-medium leading-none">PDF to Word</div>
-                      <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                  <div className="grid w-[400px] gap-3 p-6 md:w-[500px] md:grid-cols-2 lg:w-[600px] bg-white/95 backdrop-blur-xl border shadow-2xl rounded-xl">
+                    <NavigationMenuLink className="block select-none space-y-2 rounded-xl p-4 leading-none no-underline outline-none transition-all duration-300 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 hover:shadow-lg transform hover:scale-105">
+                      <div className="text-sm font-semibold leading-none text-gray-900">PDF to Word</div>
+                      <p className="line-clamp-2 text-sm leading-snug text-gray-600">
                         Convert PDF documents to editable Word files
                       </p>
                     </NavigationMenuLink>
-                    <NavigationMenuLink className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
-                      <div className="text-sm font-medium leading-none">Word to PDF</div>
-                      <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                    <NavigationMenuLink className="block select-none space-y-2 rounded-xl p-4 leading-none no-underline outline-none transition-all duration-300 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 hover:shadow-lg transform hover:scale-105">
+                      <div className="text-sm font-semibold leading-none text-gray-900">Word to PDF</div>
+                      <p className="line-clamp-2 text-sm leading-snug text-gray-600">
                         Convert Word documents to PDF format
                       </p>
                     </NavigationMenuLink>
-                    <NavigationMenuLink className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
-                      <div className="text-sm font-medium leading-none">JPG to PDF</div>
-                      <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                    <NavigationMenuLink className="block select-none space-y-2 rounded-xl p-4 leading-none no-underline outline-none transition-all duration-300 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 hover:shadow-lg transform hover:scale-105">
+                      <div className="text-sm font-semibold leading-none text-gray-900">JPG to PDF</div>
+                      <p className="line-clamp-2 text-sm leading-snug text-gray-600">
                         Convert JPG images to PDF documents
                       </p>
                     </NavigationMenuLink>
-                    <NavigationMenuLink className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
-                      <div className="text-sm font-medium leading-none">PNG to PDF</div>
-                      <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                    <NavigationMenuLink className="block select-none space-y-2 rounded-xl p-4 leading-none no-underline outline-none transition-all duration-300 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 hover:shadow-lg transform hover:scale-105">
+                      <div className="text-sm font-semibold leading-none text-gray-900">PNG to PDF</div>
+                      <p className="line-clamp-2 text-sm leading-snug text-gray-600">
                         Convert PNG images to PDF documents
                       </p>
                     </NavigationMenuLink>
@@ -71,11 +74,11 @@ const Header = () => {
               </NavigationMenuItem>
 
               <NavigationMenuItem>
-                <NavigationMenuTrigger className="h-10 px-4 py-2">
+                <NavigationMenuTrigger className="h-10 px-6 py-2 font-semibold rounded-lg hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 hover:text-blue-700 transition-all duration-300">
                   ALL PDF TOOLS
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <div className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
+                  <div className="grid w-[400px] gap-3 p-6 md:w-[500px] md:grid-cols-2 lg:w-[600px] bg-white/95 backdrop-blur-xl border shadow-2xl rounded-xl">
                     <NavigationMenuLink className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
                       <div className="text-sm font-medium leading-none">PDF to JPG</div>
                       <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
@@ -108,23 +111,24 @@ const Header = () => {
 
           {/* Right side buttons */}
           <div className="hidden md:flex items-center space-x-3">
-            <Button variant="ghost" className="text-sm font-medium">
+            <Button variant="ghost" className="text-sm font-semibold hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 hover:text-blue-700 transition-all duration-300 rounded-lg">
               Login
             </Button>
-            <Button className="bg-red-600 hover:bg-red-700 text-white text-sm font-medium px-6">
+            <Button className="bg-gradient-to-r from-red-600 to-pink-600 hover:from-red-700 hover:to-pink-700 text-white text-sm font-semibold px-8 py-2.5 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+              <Sparkles className="w-4 h-4 mr-2" />
               Sign up
             </Button>
-            
           </div>
 
           {/* Mobile menu button */}
-          <Button variant="ghost" size="icon" className="md:hidden" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
+          <Button variant="ghost" size="icon" className="md:hidden rounded-lg hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
             {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </Button>
         </div>
 
         {/* Mobile Navigation */}
-        {isMobileMenuOpen && <div className="md:hidden border-t bg-white py-4">
+        {isMobileMenuOpen && (
+          <div className="md:hidden border-t bg-white/95 backdrop-blur-xl py-4 rounded-b-xl shadow-xl">
             <div className="flex flex-col space-y-3">
               <a href="#" className="px-4 py-2 text-sm font-medium hover:bg-gray-100 rounded-md">
                 MERGE PDF
@@ -171,8 +175,11 @@ const Header = () => {
                 </Button>
               </div>
             </div>
-          </div>}
+          </div>
+        )}
       </div>
-    </header>;
+    </header>
+  );
 };
+
 export default Header;
