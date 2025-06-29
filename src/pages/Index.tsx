@@ -253,6 +253,28 @@ const Index = () => {
             </div>
           </div>
 
+          {/* Call to Action Section */}
+          <div className="mt-20">
+            <div className="bg-gradient-to-r from-blue-600 via-blue-700 to-blue-800 rounded-2xl p-12 text-center text-white">
+              <h2 className="text-4xl font-bold mb-4">Ready for More?</h2>
+              <p className="text-xl text-blue-100 mb-8 max-w-3xl mx-auto">
+                Sign up today to unlock premium features, faster processing, batch conversions, and exclusive tools. 
+                Get started with additional incentives and take your file management to the next level!
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <Button className="bg-white text-blue-700 hover:bg-blue-50 font-semibold px-8 py-3 rounded-lg text-lg">
+                  Sign Up Now - It's Free!
+                </Button>
+                <Button variant="outline" className="border-white text-white hover:bg-white/10 font-semibold px-8 py-3 rounded-lg text-lg">
+                  Learn More About Premium
+                </Button>
+              </div>
+              <p className="text-sm text-blue-200 mt-4">
+                ✨ No credit card required • Cancel anytime • 30-day money-back guarantee
+              </p>
+            </div>
+          </div>
+
           {/* How It Works Section */}
           <HowItWorksSection />
         </div>
