@@ -1,37 +1,17 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-} from "@/components/ui/navigation-menu";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger } from "@/components/ui/navigation-menu";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { ChevronDown, Menu, X } from "lucide-react";
-
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-  return (
-    <header className="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60">
+  return <header className="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60">
       <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <div className="flex items-center pl-4">
             <a href="/" className="hover:opacity-80 transition-opacity">
-              <img 
-                src="/lovable-uploads/46545966-2c8a-4e1c-a38f-a4299bcf0186.png" 
-                alt="Free Tools Forever" 
-                className="h-12 w-auto"
-              />
+              <img src="/lovable-uploads/46545966-2c8a-4e1c-a38f-a4299bcf0186.png" alt="Free Tools Forever" className="h-12 w-auto" />
             </a>
           </div>
 
@@ -134,29 +114,17 @@ const Header = () => {
             <Button className="bg-red-600 hover:bg-red-700 text-white text-sm font-medium px-6">
               Sign up
             </Button>
-            <Button variant="ghost" size="icon" className="p-2">
-              <Menu className="h-5 w-5" />
-            </Button>
+            
           </div>
 
           {/* Mobile menu button */}
-          <Button
-            variant="ghost"
-            size="icon"
-            className="md:hidden"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          >
-            {isMobileMenuOpen ? (
-              <X className="h-5 w-5" />
-            ) : (
-              <Menu className="h-5 w-5" />
-            )}
+          <Button variant="ghost" size="icon" className="md:hidden" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
+            {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </Button>
         </div>
 
         {/* Mobile Navigation */}
-        {isMobileMenuOpen && (
-          <div className="md:hidden border-t bg-white py-4">
+        {isMobileMenuOpen && <div className="md:hidden border-t bg-white py-4">
             <div className="flex flex-col space-y-3">
               <a href="#" className="px-4 py-2 text-sm font-medium hover:bg-gray-100 rounded-md">
                 MERGE PDF
@@ -203,11 +171,8 @@ const Header = () => {
                 </Button>
               </div>
             </div>
-          </div>
-        )}
+          </div>}
       </div>
-    </header>
-  );
+    </header>;
 };
-
 export default Header;
