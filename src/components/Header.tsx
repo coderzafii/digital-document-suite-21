@@ -25,12 +25,14 @@ const Header = () => {
       <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
-          <div className="flex items-center">
-            <img 
-              src="/lovable-uploads/46545966-2c8a-4e1c-a38f-a4299bcf0186.png" 
-              alt="Free Tools Forever" 
-              className="h-10 w-auto"
-            />
+          <div className="flex items-center pl-4">
+            <a href="/" className="hover:opacity-80 transition-opacity">
+              <img 
+                src="/lovable-uploads/46545966-2c8a-4e1c-a38f-a4299bcf0186.png" 
+                alt="Free Tools Forever" 
+                className="h-12 w-auto"
+              />
+            </a>
           </div>
 
           {/* Desktop Navigation */}

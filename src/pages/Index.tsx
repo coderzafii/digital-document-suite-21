@@ -1,4 +1,3 @@
-
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { FileText, File, Image, RefreshCw, Download, Upload, Split, Minimize2, Edit, Lock, Unlock } from "lucide-react";
@@ -7,6 +6,7 @@ import FileUpload from "@/components/FileUpload";
 import ConversionTool from "@/components/ConversionTool";
 import Header from "@/components/Header";
 import HowItWorksSection from "@/components/HowItWorksSection";
+import Footer from "@/components/Footer";
 
 const Index = () => {
   const [selectedTool, setSelectedTool] = useState<string | null>(null);
@@ -177,6 +177,7 @@ const Index = () => {
     return <>
         <Header />
         <ConversionTool tool={tool!} onBack={() => setSelectedTool(null)} />
+        <Footer />
       </>;
   }
 
@@ -256,6 +257,7 @@ const Index = () => {
           <HowItWorksSection />
         </div>
       </div>
+      <Footer />
     </>;
 };
 
