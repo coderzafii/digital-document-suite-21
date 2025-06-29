@@ -69,11 +69,8 @@ const Index = () => {
         {/* Main Content */}
         <div className="container mx-auto px-4 py-8">
           <div className="text-center mb-12">
-            <h1 className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-4 font-bold text-5xl text-center">All Your File Tools. Forever Free</h1>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Convert, edit, and transform your documents with our powerful online tools. 
-              Fast, secure, and completely free.
-            </p>
+            <h1 className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-4 font-bold text-5xl text-center">Free Online Tools to Manage Your Files Forever</h1>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">Access powerful online tools to manage your files with ease. Merge, compress, convert, and edit PDFs, images, and text — all in one place. No signups. No limits. Always 100% free.</p>
           </div>
 
           {/* Tools Grid */}
