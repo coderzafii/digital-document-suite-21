@@ -5,6 +5,8 @@ import { useState } from "react";
 import FileUpload from "@/components/FileUpload";
 import ConversionTool from "@/components/ConversionTool";
 import Header from "@/components/Header";
+import HowItWorksSection from "@/components/HowItWorksSection";
+
 const Index = () => {
   const [selectedTool, setSelectedTool] = useState<string | null>(null);
   const tools = [{
@@ -134,8 +136,12 @@ const Index = () => {
               </div>
             </div>
           </div>
+
+          {/* How It Works Section */}
+          <HowItWorksSection />
         </div>
       </div>
     </>;
 };
+
 export default Index;
