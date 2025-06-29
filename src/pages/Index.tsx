@@ -1,6 +1,7 @@
+
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { FileText, File, Image, RefreshCw, Download, Upload } from "lucide-react";
+import { FileText, File, Image, RefreshCw, Download, Upload, Split, Compress, Edit, Lock, Unlock } from "lucide-react";
 import { useState } from "react";
 import FileUpload from "@/components/FileUpload";
 import ConversionTool from "@/components/ConversionTool";
@@ -57,7 +58,120 @@ const Index = () => {
     fromFormat: "PDF",
     toFormat: "PNG",
     gradient: "from-red-500 to-rose-600"
+  }, {
+    id: "split-pdf",
+    title: "Split PDF",
+    description: "Separate PDF pages into individual files",
+    icon: Split,
+    fromFormat: "PDF",
+    toFormat: "PDF",
+    gradient: "from-indigo-500 to-blue-600"
+  }, {
+    id: "compress-pdf",
+    title: "Compress PDF",
+    description: "Reduce PDF file size while maintaining quality",
+    icon: Compress,
+    fromFormat: "PDF",
+    toFormat: "PDF",
+    gradient: "from-emerald-500 to-green-600"
+  }, {
+    id: "edit-pdf",
+    title: "Edit PDF",
+    description: "Add text, images, and annotations to PDF",
+    icon: Edit,
+    fromFormat: "PDF",
+    toFormat: "PDF",
+    gradient: "from-violet-500 to-purple-600"
+  }, {
+    id: "protect-pdf",
+    title: "Protect PDF",
+    description: "Add password protection to your PDF files",
+    icon: Lock,
+    fromFormat: "PDF",
+    toFormat: "PDF",
+    gradient: "from-amber-500 to-orange-600"
+  }, {
+    id: "unlock-pdf",
+    title: "Unlock PDF",
+    description: "Remove password protection from PDF files",
+    icon: Unlock,
+    fromFormat: "PDF",
+    toFormat: "PDF",
+    gradient: "from-rose-500 to-pink-600"
+  }, {
+    id: "compress-image",
+    title: "Compress Image",
+    description: "Reduce image file size without losing quality",
+    icon: Compress,
+    fromFormat: "JPG/PNG",
+    toFormat: "JPG/PNG",
+    gradient: "from-cyan-500 to-blue-600"
+  }, {
+    id: "jpeg-to-png",
+    title: "JPEG to PNG",
+    description: "Convert JPEG images to PNG format",
+    icon: Image,
+    fromFormat: "JPEG",
+    toFormat: "PNG",
+    gradient: "from-lime-500 to-green-600"
+  }, {
+    id: "png-to-jpg",
+    title: "PNG to JPG",
+    description: "Convert PNG images to JPG format",
+    icon: Image,
+    fromFormat: "PNG",
+    toFormat: "JPG",
+    gradient: "from-sky-500 to-cyan-600"
+  }, {
+    id: "html-to-pdf",
+    title: "HTML to PDF",
+    description: "Convert HTML web pages to PDF documents",
+    icon: FileText,
+    fromFormat: "HTML",
+    toFormat: "PDF",
+    gradient: "from-fuchsia-500 to-purple-600"
+  }, {
+    id: "excel-to-pdf",
+    title: "Excel to PDF",
+    description: "Convert Excel spreadsheets to PDF format",
+    icon: File,
+    fromFormat: "XLSX",
+    toFormat: "PDF",
+    gradient: "from-emerald-500 to-teal-600"
+  }, {
+    id: "pdf-to-excel",
+    title: "PDF to Excel",
+    description: "Extract data from PDF to Excel spreadsheet",
+    icon: File,
+    fromFormat: "PDF",
+    toFormat: "XLSX",
+    gradient: "from-blue-500 to-indigo-600"
+  }, {
+    id: "merge-pdf",
+    title: "Merge PDF",
+    description: "Combine multiple PDF files into one document",
+    icon: FileText,
+    fromFormat: "PDF",
+    toFormat: "PDF",
+    gradient: "from-orange-500 to-amber-600"
+  }, {
+    id: "rotate-pdf",
+    title: "Rotate PDF",
+    description: "Rotate PDF pages to correct orientation",
+    icon: RefreshCw,
+    fromFormat: "PDF",
+    toFormat: "PDF",
+    gradient: "from-pink-500 to-rose-600"
+  }, {
+    id: "pdf-to-text",
+    title: "PDF to Text",
+    description: "Extract text content from PDF documents",
+    icon: FileText,
+    fromFormat: "PDF",
+    toFormat: "TXT",
+    gradient: "from-slate-500 to-gray-600"
   }];
+
   if (selectedTool) {
     const tool = tools.find(t => t.id === selectedTool);
     return <>
@@ -65,6 +179,7 @@ const Index = () => {
         <ConversionTool tool={tool!} onBack={() => setSelectedTool(null)} />
       </>;
   }
+
   return <>
       <Header />
       <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
@@ -75,8 +190,8 @@ const Index = () => {
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">Access powerful online tools to manage your files with ease. Merge, compress, convert, and edit PDFs, images, and text — all in one place. No signups. No limits. Always 100% free.</p>
           </div>
 
-          {/* Tools Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+          {/* Tools Grid - 5 per row on PC, 2 per row on mobile */}
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 max-w-7xl mx-auto">
             {tools.map(tool => {
             const IconComponent = tool.icon;
             return <Card key={tool.id} className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-2 cursor-pointer border-0 shadow-lg bg-white/80 backdrop-blur-sm" onClick={() => setSelectedTool(tool.id)}>
