@@ -1,7 +1,7 @@
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { FileText, File, Image, RefreshCw, Download, Upload, Split, Compress, Edit, Lock, Unlock } from "lucide-react";
+import { FileText, File, Image, RefreshCw, Download, Upload, Split, Minimize2, Edit, Lock, Unlock } from "lucide-react";
 import { useState } from "react";
 import FileUpload from "@/components/FileUpload";
 import ConversionTool from "@/components/ConversionTool";
@@ -70,7 +70,7 @@ const Index = () => {
     id: "compress-pdf",
     title: "Compress PDF",
     description: "Reduce PDF file size while maintaining quality",
-    icon: Compress,
+    icon: Minimize2,
     fromFormat: "PDF",
     toFormat: "PDF",
     gradient: "from-emerald-500 to-green-600"
@@ -102,7 +102,7 @@ const Index = () => {
     id: "compress-image",
     title: "Compress Image",
     description: "Reduce image file size without losing quality",
-    icon: Compress,
+    icon: Minimize2,
     fromFormat: "JPG/PNG",
     toFormat: "JPG/PNG",
     gradient: "from-cyan-500 to-blue-600"
