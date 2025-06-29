@@ -109,28 +109,28 @@ const Index = () => {
 
           {/* Features Section */}
           <div className="mt-20 text-center">
-            <h2 className="text-3xl font-bold text-gray-800 mb-8">Why Choose Our Tools?</h2>
+            <h2 className="text-3xl font-bold text-gray-800 mb-8">Why Millions Trust Our Free Online File Tools?</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
               <div className="p-6">
                 <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-emerald-600 rounded-lg flex items-center justify-center mx-auto mb-4">
                   <Upload className="w-6 h-6 text-white" />
                 </div>
                 <h3 className="text-xl font-semibold text-gray-800 mb-2">Easy Upload</h3>
-                <p className="text-gray-600">Simply drag and drop your files or click to browse</p>
+                <p className="text-gray-600">Upload your documents quickly with drag & drop or click-to-browse. Works for PDFs, images, and text files.</p>
               </div>
               <div className="p-6">
                 <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-cyan-600 rounded-lg flex items-center justify-center mx-auto mb-4">
                   <RefreshCw className="w-6 h-6 text-white" />
                 </div>
-                <h3 className="text-xl font-semibold text-gray-800 mb-2">Fast Conversion</h3>
-                <p className="text-gray-600">Convert your files in seconds with high quality results</p>
+                <h3 className="text-xl font-semibold text-gray-800 mb-2">Fast File Conversion</h3>
+                <p className="text-gray-600">Convert PDF, image, or document files in seconds — high speed with accurate results every time.</p>
               </div>
               <div className="p-6">
                 <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-600 rounded-lg flex items-center justify-center mx-auto mb-4">
                   <Download className="w-6 h-6 text-white" />
                 </div>
-                <h3 className="text-xl font-semibold text-gray-800 mb-2">Instant Download</h3>
-                <p className="text-gray-600">Download your converted files immediately</p>
+                <h3 className="text-xl font-semibold text-gray-800 mb-2">Instant & Secure Downloads</h3>
+                <p className="text-gray-600">Download your converted files instantly. No delays, no signups, and always secure.</p>
               </div>
             </div>
           </div>
