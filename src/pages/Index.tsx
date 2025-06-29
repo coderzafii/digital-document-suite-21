@@ -7,7 +7,6 @@ import ConversionTool from "@/components/ConversionTool";
 import Header from "@/components/Header";
 import HowItWorksSection from "@/components/HowItWorksSection";
 import Footer from "@/components/Footer";
-
 const Index = () => {
   const [selectedTool, setSelectedTool] = useState<string | null>(null);
   const tools = [{
@@ -171,7 +170,6 @@ const Index = () => {
     toFormat: "TXT",
     gradient: "from-slate-500 to-gray-600"
   }];
-
   if (selectedTool) {
     const tool = tools.find(t => t.id === selectedTool);
     return <>
@@ -180,7 +178,6 @@ const Index = () => {
         <Footer />
       </>;
   }
-
   return <>
       <Header />
       <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
@@ -262,16 +259,14 @@ const Index = () => {
                 Get started with additional incentives and take your file management to the next level!
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <Button className="bg-white text-blue-700 hover:bg-blue-50 font-semibold px-8 py-3 rounded-lg text-lg">
+                <Button className="font-semibold px-8 py-3 rounded-lg text-lg bg-white text-blue-700">
                   Sign Up Now - It's Free!
                 </Button>
-                <Button variant="outline" className="border-white text-white hover:bg-white/10 font-semibold px-8 py-3 rounded-lg text-lg">
+                <Button variant="outline" className="border-white text-white font-semibold px-8 py-3 rounded-lg text-lg bg-blue-700 hover:bg-blue-600">
                   Learn More About Premium
                 </Button>
               </div>
-              <p className="text-sm text-blue-200 mt-4">
-                ✨ No credit card required • Cancel anytime • 30-day money-back guarantee
-              </p>
+              <p className="text-sm text-blue-200 mt-4"> No credit card required • Cancel anytime • 30-day money-back guarantee</p>
             </div>
           </div>
 
@@ -282,5 +277,4 @@ const Index = () => {
       <Footer />
     </>;
 };
-
 export default Index;
