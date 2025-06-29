@@ -1,10 +1,7 @@
-
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-
 const Footer = () => {
-  return (
-    <footer className="bg-gradient-to-r from-blue-600 via-blue-700 to-blue-800 mt-20">
+  return <footer className="bg-gradient-to-r from-blue-600 via-blue-700 to-blue-800 mt-20">
       <div className="container mx-auto px-6 py-12 max-w-6xl">
         {/* Main Footer Content */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
@@ -59,33 +56,9 @@ const Footer = () => {
 
         {/* App Store Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 mb-8 justify-center">
-          <Button 
-            variant="outline" 
-            className="flex items-center gap-2 px-6 py-3 border-2 border-blue-300 bg-white/10 backdrop-blur-sm rounded-lg hover:bg-white/20 transition-colors cursor-not-allowed opacity-60"
-            disabled
-          >
-            <div className="w-8 h-8 bg-gradient-to-r from-green-400 to-blue-500 rounded flex items-center justify-center">
-              <span className="text-white font-bold text-xs">▶</span>
-            </div>
-            <div className="text-left">
-              <div className="text-xs text-blue-100">GET IT ON</div>
-              <div className="text-sm font-semibold text-white">Coming Soon</div>
-            </div>
-          </Button>
           
-          <Button 
-            variant="outline" 
-            className="flex items-center gap-2 px-6 py-3 border-2 border-blue-300 bg-white/10 backdrop-blur-sm rounded-lg hover:bg-white/20 transition-colors cursor-not-allowed opacity-60"
-            disabled
-          >
-            <div className="w-8 h-8 bg-gradient-to-r from-blue-400 to-purple-500 rounded flex items-center justify-center">
-              <span className="text-white font-bold text-xs">🍎</span>
-            </div>
-            <div className="text-left">
-              <div className="text-xs text-blue-100">Download on the</div>
-              <div className="text-sm font-semibold text-white">Coming Soon</div>
-            </div>
-          </Button>
+          
+          
         </div>
 
         <Separator className="mb-6 bg-blue-400/30" />
@@ -121,8 +94,6 @@ const Footer = () => {
           </div>
         </div>
       </div>
-    </footer>
-  );
+    </footer>;
 };
-
 export default Footer;
